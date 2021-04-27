@@ -1,17 +1,5 @@
 # author: Agustin Hernandez / IGN: Barrilete / Discord: Barrilete#9691
 
-def invalido(cadena):  # if parameter cadena isn't a whole number, returns False
-    valor = False
-    longitud = len(cadena)
-    if longitud == 0:
-        valor = True
-    else:
-        for i in range(longitud):
-            if (ord(cadena[i]) < 48) or (ord(cadena[i]) > 57):
-                valor = True
-    return valor
-
-
 def seleccionidioma():
     lan = " "
     while not(lan == "es" or lan == "en"):
@@ -56,10 +44,10 @@ continuar = True
 while continuar:
 
     item = input(priceInputText[opt])
-    if invalido(item):
+    if not(item.isnumeric()):
         item = 0
         print(invalidInputText[opt])
-    elif item == 0:
+    elif item == "0":
         continuar = False
     else:
         item = int(100 * int(item) / (100 - tax))
