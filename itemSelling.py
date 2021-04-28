@@ -31,24 +31,27 @@ print("Barrilete's Item selling tool")
 file = open("selling.txt", "w")  # The file selling.txt is created where this script is located. If a selling.txt already exists, it will be overwritten.
 opt = seleccionidioma()  # language will be selected here by calling the function
 
-reparacion = int(input(repairText[opt]))  # repairing cost is added here
-while reparacion < 0:
+reparacion = input(repairText[opt])  # Repairing cost
+while not(reparacion.isnumeric()):  # We make sure it's a valid input for a reparation cost
     print(incorrectValue[opt])
-    reparacion = int(input(repairText[opt]))
+    reparacion = input(repairText[opt])
+reparacion = int(reparacion)  # The repair cost is casted as integer here
 
 file.write(f"repair cost / costo de reparación: {reparacion}\n\n")  # repairing cost is addede to the file selling.txt
 
-tax = float(input(taxText[opt]))
-while not(0 < tax < 100):
+tax = input(taxText[opt])
+while not(tax.isnumeric()) or tax == "0":
     print(incorrectValue[opt])
-    tax = float(input(taxText[opt]))
+    tax = input(taxText[opt])
+tax = float(tax)
 
 file.write(f"tax/impuesto: {tax}%\n\n")
 
-cant = int(input(cantText[opt]))
-while cant < 1:
+cant = input(cantText[opt])
+while not(cant.isnumeric()) or cant == "0":
     print(incorrectValue[opt])
-    cant = int(input(cantText[opt]))
+    cant = input(cantText[opt])
+cant = int(cant)
 
 file.write(f"Players / Jugadores: {cant} \n\n")
 
