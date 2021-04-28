@@ -15,6 +15,7 @@ def seleccionidioma():
 # List of messages, if english is selected the messages will be called by nameMessage[1], for spanish nameMessage[0]
 
 repairText = ["Monto de reparación: ", "Repair cost: "]
+incorrectValue = ["Valor incorrecto.", "Incorrect value."]
 taxText = ["Porcentaje de impuesto: ", "Market taxes: "]
 cantText = ["Cantidad de jugadores: ", "Amount of players: "]
 itemInputText = ["Ingresar precio de item\n", "Type in the item's price\n"]
@@ -31,13 +32,25 @@ file = open("selling.txt", "w")  # The file selling.txt is created where this sc
 opt = seleccionidioma()  # language will be selected here by calling the function
 
 reparacion = int(input(repairText[opt]))  # repairing cost is added here
-file.write("repair cost / costo de reparación: {}\n\n".format(str(reparacion)))  # repairing cost is addede to the file selling.txt
+while reparacion < 0:
+    print(incorrectValue[opt])
+    reparacion = int(input(repairText[opt]))
+
+file.write(f"repair cost / costo de reparación: {reparacion}\n\n")  # repairing cost is addede to the file selling.txt
 
 tax = float(input(taxText[opt]))
-file.write("tax/impuesto: {}%\n\n".format(str(tax)))
+while not(0 < tax < 100):
+    print(incorrectValue[opt])
+    tax = float(input(taxText[opt]))
+
+file.write(f"tax/impuesto: {tax}%\n\n")
 
 cant = int(input(cantText[opt]))
-file.write("Players / Jugadores: {} \n\n".format(str(cant)))
+while cant < 1:
+    print(incorrectValue[opt])
+    cant = int(input(cantText[opt]))
+
+file.write(f"Players / Jugadores: {cant} \n\n")
 
 sumatoria = 0
 continuar = True
@@ -59,13 +72,13 @@ ganancia = int(total / cant)
 
 
 print(sellingValueDisplay[opt] + str(sumatoria))
-file.write("\nVALOR TOTAL DE VENTA / SELLING VALUE: {}  \n".format(str(sumatoria)))
+file.write(f"\nVALOR TOTAL DE VENTA / SELLING VALUE: {sumatoria}  \n")
 
 print(totalEarningsDisplay[opt] + str(total))
-file.write("GANANCIA TOTAL / TOTAL PROFIT: {}  \n".format(str(total)))
+file.write(f"GANANCIA TOTAL / TOTAL PROFIT: {total}  \n")
 
 print(individualEarningsDisplay[opt] + str(ganancia) + "\n\n")
-file.write("GANANCIA INDIVIDUAL / INDIVIDUAL PROFIT ({} PARTICIPANTES/PLAYERS)  {} \n \n".format(str(cant), str(ganancia)))
+file.write(f"GANANCIA INDIVIDUAL / INDIVIDUAL PROFIT ({cant} PARTICIPANTES/PLAYERS)  {ganancia} \n \n")
 
 file.close()  # Closes venta.txt
 
