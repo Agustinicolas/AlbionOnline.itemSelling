@@ -17,8 +17,8 @@ def seleccionidioma():
 repairText = ["Monto de reparación: ", "Repair cost: "]
 incorrectValue = ["Valor incorrecto.", "Incorrect value."]
 taxText = ["Porcentaje de impuesto: ", "Market taxes: "]
-cantText = ["Cantidad de jugadores: ", "Amount of players: "]
-itemInputText = ["Ingresar precio de item\n", "Type in the item's price\n"]
+cantText = ["Cantidad de jugadores: ", "Number of players: "]
+itemInputText = ["Ingresar precio de item\n", "Type in item's price\n"]
 priceInputText = ["Ingresar precio de item o el valor 0 para finalizar \n", "Type in the item´s price or 0 to finish \n"]
 invalidInputText = ["Entrada incorrecta \n", "Invalid input \n"]
 sellingValueDisplay = ["\nVALOR TOTAL DE VENTA: ", "\nSELLING VALUE: "]
@@ -66,21 +66,25 @@ while continuar:
     elif item == "0":
         continuar = False
     else:
-        item = int(100 * int(item) / (100 - tax))
         file.write("{}\n".format(str(item)))
-        sumatoria = sumatoria + item
+        sumatoria = sumatoria + int(item)
 
-total = int(sumatoria * (100 - tax)/100) - reparacion
-ganancia = int(total / cant)
+total = int(sumatoria)
+setupFee = (total * 0.015)
+marketFee = (total * (tax/100))
+total = total - (setupFee + marketFee)
+
+
+ganancia = int((total - reparacion))
 
 
 print(sellingValueDisplay[opt] + str(sumatoria))
 file.write(f"\nVALOR TOTAL DE VENTA / SELLING VALUE: {sumatoria}  \n")
 
 print(totalEarningsDisplay[opt] + str(total))
-file.write(f"GANANCIA TOTAL / TOTAL PROFIT: {total}  \n")
+file.write(f"GANANCIA TOTAL / TOTAL PROFIT: {ganancia}  \n")
 
-print(individualEarningsDisplay[opt] + str(ganancia) + "\n\n")
+print(individualEarningsDisplay[opt] + str(ganancia/cant) + "\n\n")
 file.write(f"GANANCIA INDIVIDUAL / INDIVIDUAL PROFIT ({cant} PARTICIPANTES/PLAYERS)  {ganancia} \n \n")
 
 file.close()  # Closes venta.txt
