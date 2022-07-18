@@ -82,10 +82,10 @@ print(sellingValueDisplay[opt] + str(sumatoria))
 file.write(f"\nVALOR TOTAL DE VENTA / SELLING VALUE: {sumatoria}  \n")
 
 print(totalEarningsDisplay[opt] + str(total))
-file.write(f"GANANCIA TOTAL / TOTAL PROFIT: {ganancia}  \n")
+file.write(f"GANANCIA TOTAL / TOTAL PROFIT: {total}  \n")
 
-print(individualEarningsDisplay[opt] + str(ganancia/cant) + "\n\n")
-file.write(f"GANANCIA INDIVIDUAL / INDIVIDUAL PROFIT ({cant} PARTICIPANTES/PLAYERS)  {ganancia} \n \n")
+print(individualEarningsDisplay[opt] + str(total/cant) + "\n\n")
+file.write(f"GANANCIA INDIVIDUAL / INDIVIDUAL PROFIT ({cant} PARTICIPANTES/PLAYERS)  {total} \n \n")
 
 file.close()  # Closes venta.txt
 
